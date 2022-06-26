@@ -28,5 +28,5 @@ jobs:
       - name: Upload Release
         uses: actions/upload-artifact@v3
         with:
-          name: release
-          path: Release
+          name: windows
+          path: out/Release

@@ -21,3 +21,21 @@ jobs:
         run: make build-ci -j2 V=1
       - name: Test
         run: make run-ci -j2 V=1 TEST_CI_ARGS="-p dots"
+
+  build-macOS:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Environment Information
+        run: npx envinfo
+      - name: Build
+        run: make binary -j2 V=1 --with-intl=none
+      - name: Upload Release
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux
+          path: out/Release
