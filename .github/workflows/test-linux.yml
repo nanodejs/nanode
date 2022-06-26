@@ -23,7 +23,7 @@ jobs:
       - name: Test
         run: make run-ci -j2 V=1 TEST_CI_ARGS="-p dots"
 
-  build-macOS:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
