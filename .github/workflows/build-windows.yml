@@ -1,10 +1,14 @@
 name: build-windows
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
 
 env:
   PYTHON_VERSION: 2.7
   FLAKY_TESTS: dontcare
+  i18n_arg: none
 
 jobs:
   build-windows:
@@ -21,3 +25,8 @@ jobs:
         run: npx envinfo
       - name: Build
         run: ./vcbuild.bat
+      - name: Upload Release
+        uses: actions/upload-artifact@v3
+        with:
+          name: release
+          path: Release
