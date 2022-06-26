@@ -964,16 +964,15 @@ release-only: check-xz
 		echo "" >&2 ; \
 		exit 1 ; \
 	fi
-	@if [ "$(DISTTYPE)" != "release" -o "$(RELEASE)" = "1" ]; then \
-		exit 0; \
-	else \
-		echo "" >&2 ; \
-		echo "#DISTTYPE is set to $(DISTTYPE)." >&2 ; \
-		echo "#NODE_VERSION_IS_RELEASE is set to $(RELEASE)." >&2 ; \
-		echo "Did you remember to update src/node_version.h?" >&2 ; \
-		echo "" >&2 ; \
-		exit 1 ; \
-	fi
+# @if [ "$(DISTTYPE)" != "release" -o "$(RELEASE)" = "1" ]; then \
+# 	exit 0; \
+# else \
+# 	echo "" >&2 ; \
+# 	echo "#NODE_VERSION_IS_RELEASE is set to $(RELEASE)." >&2 ; \
+# 	echo "Did you remember to update src/node_version.h?" >&2 ; \
+# 	echo "" >&2 ; \
+# 	exit 1 ; \
+# fi
 
 $(PKG): release-only
 	$(RM) -r $(MACOSOUTDIR)
