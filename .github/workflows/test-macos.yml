@@ -5,6 +5,7 @@ on: [push, pull_request]
 env:
   PYTHON_VERSION: 2.7
   FLAKY_TESTS: dontcare
+  BUILD_INTL_FLAGS: --with-intl=none
 
 jobs:
   test-macOS:
@@ -33,7 +34,7 @@ jobs:
       - name: Environment Information
         run: npx envinfo
       - name: Build
-        run: make binary -j8 V=1 --with-intl=none
+        run: make binary -j8 V=1
       - name: Upload Release
         uses: actions/upload-artifact@v3
         with:
