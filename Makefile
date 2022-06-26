@@ -820,7 +820,7 @@ FULLVERSION=$(VERSION)-$(TAG)
 endif # ifeq ($(DISTTYPE),release)
 
 DISTTYPEDIR ?= $(DISTTYPE)
-RELEASE=$(shell sed -ne 's/\#define NODE_VERSION_IS_RELEASE \([01]\)/\1/p' src/node_version.h)
+RELEASE=1 # $(shell sed -ne 's/\#define NODE_VERSION_IS_RELEASE \([01]\)/\1/p' src/node_version.h)
 PLATFORM=$(shell uname | tr '[:upper:]' '[:lower:]')
 NPMVERSION=v$(shell cat deps/npm/package.json | grep '"version"' | sed 's/^[^:]*: "\([^"]*\)",.*/\1/')
 
@@ -964,15 +964,15 @@ release-only: check-xz
 		echo "" >&2 ; \
 		exit 1 ; \
 	fi
-	@if [ "$(DISTTYPE)" != "release" -o "$(RELEASE)" = "1" ]; then \
-		exit 0; \
-	else \
-		echo "" >&2 ; \
-		echo "#NODE_VERSION_IS_RELEASE is set to $(RELEASE)." >&2 ; \
-		echo "Did you remember to update src/node_version.h?" >&2 ; \
-		echo "" >&2 ; \
-		exit 1 ; \
-	fi
+# @if [ "$(DISTTYPE)" != "release" -o "$(RELEASE)" = "1" ]; then \
+# 	exit 0; \
+# else \
+# 	echo "" >&2 ; \
+# 	echo "#NODE_VERSION_IS_RELEASE is set to $(RELEASE)." >&2 ; \
+# 	echo "Did you remember to update src/node_version.h?" >&2 ; \
+# 	echo "" >&2 ; \
+# 	exit 1 ; \
+# fi
 
 $(PKG): release-only
 	$(RM) -r $(MACOSOUTDIR)
